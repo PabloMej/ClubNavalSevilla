@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<div class="container my-5">
+		<header th:replace="layout/layout :: header"></header>
+
+		<!-- LISTA DE barcos -->
+		<div class="card">
+			<div class="card-header">
+				<h1>Barcos</h1>
+			</div>
+			<div class="card-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Matrícula</th>
+							<th>Nombre</th>
+							<th>Cuota</th>
+							<th>Amarre</th>
+							<th>Socio propietario</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="barco : ${barcos}" th:if="${barcos.size()} > 0">
+							<td th:text="${barco.matricula}"></td>
+							<td th:text="${barco.nombre}"></td>
+							<td th:text="${barco.cuota}"></td>
+							<td th:text="${barco.amarre}"></td>
+							<td th:text="${barco.socio.nombre}"
+								th:if="${barco.socio} != null"></td>
+							<td th:if="${barco.socio} == null"></td>
+							<td><a
+								th:href="@{/salidas/listSalidasBarcos/{id}(id=${barco.id})}"
+								class="btn btn-primary btn-sm"> Mostrar Salidas </a>
+						</tr>
+						<tr th:if="${barcos.size()} == 0">
+							<td colspan="3" class="text-center">No se han encontrado
+								registros</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

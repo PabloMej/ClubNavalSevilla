@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<div class="container my-5">
+
+		<header th:replace="layout/layout :: header"></header>
+		<!-- LISTA DE patrones -->
+		<div class="card">
+			<div class="card-header">
+				<h1 th:text="'Salidas del barco ' + ${barco.nombre} "></h1>
+			</div>
+			<div class="card-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Patron</th>
+							<th>Fecha</th>
+							<th>Destino</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="salida : ${salidas}" th:if="${salidas.size()} > 0">
+							<td th:text="${salida.patron.nombre}"></td>
+							<td th:text="${salida.fechaHoraSalida}"></td>
+							<td th:text="${salida.destino}"></td>
+						</tr>
+						<tr th:if="${salidas.size()} == 0">
+							<td colspan="3" class="text-center">No se han encontrado
+								registros</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<footer th:replace="layout/layout :: footer">
+			</footer>
+</body>
+</html>

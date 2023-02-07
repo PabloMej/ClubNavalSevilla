@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<div class="container my-5">
+		<header th:replace="layout/layout :: header"></header>
+		<!-- CREAR NUEVO PATRÓN -->
+		<div class="mt-3 mb-3">
+			<a href="/patrones/createNewPatron"
+				class="btn btn-primary btn-lg active" role="button"
+				aria-pressed="true">Crear nuevo patrón</a>
+		</div>
+
+		<!-- LISTA DE patrones -->
+		<div class="card">
+			<div class="card-header">
+				<h1>patrones</h1>
+			</div>
+			<div class="card-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Dni</th>
+							<th>Nombre</th>
+							<th>Telefono</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="patron : ${patrones}" th:if="${patrones.size()} > 0">
+							<td th:text="${patron.dni}"></td>
+							<td th:text="${patron.nombre}"></td>
+							<td th:text="${patron.telefono}"></td>
+							<td><a th:href="@{/patrones/editPatron/{id}(id=${patron.id})}"
+								class="btn btn-primary btn-sm">Editar
+									</button>
+							</a></td>
+							<td><a th:href="@{/patrones/deletePatron/{id}(id=${patron.id})}"
+								class="btn btn-danger btn-sm">Borrar
+									</button>
+							</a></td>
+						</tr>
+						<tr th:if="${patrones.size()} == 0">
+							<td colspan="3" class="text-center">No se han encontrado
+								registros</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

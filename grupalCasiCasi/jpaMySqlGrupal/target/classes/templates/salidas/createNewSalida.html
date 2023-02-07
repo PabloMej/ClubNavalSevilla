@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<div class="container my-5">
+		<header th:replace="layout/layout :: header"></header>
+
+		<!-- FORMULARIO DE ALTA -->
+		<div class="card">
+			<div class="card-header">
+				<h1>Registro nueva salida</h1>
+			</div>
+
+			<form action="#" th:action="@{/salidas/listSalidas}"
+				th:object="${salida}" th:method="post">
+				<div class="form-group">
+					<label for="fechaHoraSalida">Fecha y hora de la salida</label> <input
+						type="datetime-local" class="form-control" id="fechaHoraSalida"
+						name="fechaHoraSalida" th:field="*{fechaHoraSalida}">
+					<div style="color: red"
+						th:if="${#fields.hasErrors('fechaHoraSalida')}"
+						th:errors="*{fechaHoraSalida}"></div>
+				</div>
+				<div class="form-group">
+					<label for="destino">Destino</label> <input type="text"
+						class="form-control" id="nombre" name="destino"
+						th:field="*{destino}">
+					<div style="color: red" th:if="${#fields.hasErrors('destino')}"
+						th:errors="*{destino}"></div>
+				</div>
+				<div class="form-group">
+					<label for="patron">Barco</label>
+					<div>
+						<select class="form-control" th:field="*{barco}" name="barco">
+							<option th:each="barco : ${barcos}" th:value="${barco.id}"
+								th:text="${barco.nombre} + ' - ' + ${barco.matricula} ">
+							</option>
+					</div>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="patron">Patrón</label>
+					<div>
+						<select class="form-control" th:field="*{patron}" name="patron">
+							<option th:each="patron : ${patrones}" th:value="${patron.id}"
+								th:text="${patron.nombre} + ' - ' + ${patron.dni} "></option>
+						</select>
+					</div>
+				</div>
+				<br>
+				<div class="d-flex justify-content-between">
+					<a th:href="@{/salidas/listSalidas}" class="btn btn-primary">Volver</a>
+					<input type="submit" class="btn btn-primary" value="Submit" />
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+<footer th:replace="layout/layout :: footer"> </footer>
+</html>

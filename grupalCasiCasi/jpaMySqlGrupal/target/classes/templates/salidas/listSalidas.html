@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{layout/layout :: head}"></head>
+<body>
+	<div class="container my-5">
+		
+		<header th:replace="~{layout/layout :: header}"></header>
+		
+		<div class="card">
+			<div class="card-header">
+				<h1>Salidas</h1>
+			</div>
+			<div class="card-body">
+				<form th:method="post" th:action="@{/salidas/listarSalidasNombre}" th:object="${barco}">
+				<label>Buscar salidas del barco: </label>
+					<input type="text" th:field="*{nombre}">
+					<input type="submit" class="btn btn-primary" value="Submit" />
+					
+					</form>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Barco</th>
+							<th>Patrón</th>
+							<th>Fecha</th>
+							<th>Destino</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="salida : ${salidas}" th:if="${salidas.size()} > 0">
+						
+							<td th:text="${salida.barco.nombre}" th:if="${salida.barco} != null"></td>
+							<td th:if="${salida.barco} == null">   </td>
+							<td th:text="${salida.patron.nombre}"></td>
+							<td th:text="${salida.fechaHoraSalida}"></td>
+							<td th:text="${salida.destino}"></td>
+							
+						</tr>
+						<tr th:if="${salidas.size()} == 0">
+							<td colspan="3" class="text-center">No se han encontrado registros</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	<footer th:replace="~{layout/layout :: footer}"></footer>
+</body>
+</html>

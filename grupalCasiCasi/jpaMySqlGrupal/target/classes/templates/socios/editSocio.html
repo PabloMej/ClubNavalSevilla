@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{layout/layout :: head}"></head>
+<body>
+	<div class="container my-5">
+		<header th:replace="~{layout/layout :: header}"></header>
+
+		<!-- FORMULARIO DE MODIFICACIÓN -->
+		<div class="card">
+			<div class="card-header">
+				<h1>Formulario de modificación</h1>
+			</div>
+
+			<form action="#" th:action="@{/socios/editSocio}"
+				th:object="${socio}" th:method="post">
+				<input type="hidden" th:field="*{id}" />
+				<div class="form-group">
+					<label for="dni">DNI</label> <input type="text"
+						class="form-control" id="dni" name="dni" th:field="*{dni}">
+					<div style="color: red" th:if="${#fields.hasErrors('dni')}"
+						th:errors="*{dni}"></div>
+				</div>
+				<div class="form-group">
+					<label for="nombre">Nombre</label> <input type="text"
+						class="form-control" id="nombre" name="nombre"
+						th:field="*{nombre}">
+					<div style="color: red" th:if="${#fields.hasErrors('nombre')}"
+						th:errors="*{nombre}"></div>
+				</div>
+				<div class="form-group">
+					<label for="nombre">Teléfono</label> <input type="text"
+						class="form-control" id="telefono" name="telefono"
+						th:field="*{telefono}">
+					<div style="color: red" th:if="${#fields.hasErrors('telefono')}"
+						th:errors="*{telefono}"></div>
+				</div>
+				<div class="form-group">
+					<label for="nombre">Email</label> <input type="email"
+						class="form-control" id="email" name="email"
+						th:field="*{email}">
+					<div style="color: red" th:if="${#fields.hasErrors('email')}"
+						th:errors="*{email}"></div>
+				</div>
+
+				<div class="d-flex justify-content-between">
+					<a th:href="@{/socios/listSocios}" class="btn btn-primary">Volver</a>
+					<input type="submit" class="btn btn-primary" value="Submit" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer th:replace="~{layout/layout :: footer}"></footer>
+</body>
+</html>
